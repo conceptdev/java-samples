@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://assets/bootstrap.min.css">
+    <link href="https://assets/styles.css" rel="stylesheet">
+    <link href="https://assets/menu.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="fold-tester"></div>
+<div class="menu sticky-top">
+    <div class="left">
+        <img src="https://assets/menuw.png" width="30" height="30" />
+    </div>
+    <div class="center">Surface Duo News</div>
+    <div class="right">
+
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="article">
+        <h1 class="headline display-5 font-weight-bold font-italic">Introduction to Dual Screen Devices</h1>
+
+        <p class="article-text">Dual-screen devices are portable multi-posture devices with two symmetric screens that work together in unique ways to provide productivity in a flexible form factor.</p>
+        <p class="article-text">With dual-screen devices such as Microsoft's Surface Neo and Surface Duo, people can get things done on-the-go faster than ever: take notes on one screen and review the full project proposal on the other while in transit; sit down at a table to write a thoughtful email using a software or hardware keyboard while waiting for lunch; and then watch a video, browse the web, or read a book as you get back to your life.</p>
+        <p class="article-text">Although dual-screen devices unlock new possibilities for your apps, your existing apps will work as expected on the devices, and there are improvements that you will get without doing any work. This documentation will point those out, while also showing new ways to enhance your app experience by making your app aware of the dual-screen nature of the device.</p>
+        <p class="article-text">While there are different dual-screen devices now in the market and more coming, we believe there can be a common way of approaching the design of apps for these devices. We hope this will help your app reach more devices without re-designing from scratch for every device.</p>
+        <p class="article-text">In this article, we talk about common design patterns and concepts that are applicable regardless of the operating system you target or the development language you use. You will still need to create separate apps using applicable technologies and SDKs that you are able to deploy to Android, Windows, or both. For platform specific information about developing apps for dual-screen devices, see Develop for Android or Develop for Windows.</p>
+        <p class="article-text">The technology is still evolving and our guidance here may change as we progress. Your feedback is welcome.</p>
+        <p class="article-text"><b>Dual-screen overview</b></p>
+        <p class="article-text">Dual-screen devices can come in a range of hardware and industrial design variations. The recently announced Surface Neo and Surface Duo are intended to help define the category, but other devices may come with larger displays or varying hinge designs. As you design your apps, keep in mind that you should avoid designing to the specifications of any specific devices available today.</p>
+        <p class="article-text">All dual-screen devices can fold, flip, and rotate. Both screens can be used as displays, or one screen may act as a keyboard. The different form factors support a wide variety of activities and allow the user to fit the device to their situation. By taking advantage of the various postures with your app, you will help your users achieve more.</p>
+        <p class="article-text">When the user launches an app, its core window opens maximized and occupies the full width and height of a single screen. Users can have multiple applications open at once this way, allowing for side-by-side use of apps and intuitive drag-and-drop scenarios.</p>
+        <p class="article-text">An app can also appear across both screens, which is known as a spanned layout. By default, the app will act as if it is being displayed across a larger screen. You can modify your existing app layouts to accommodate the seam between the two screens, or you can go further and design your app using layout controls specifically created to take full advantage of dual-screen devices. This is discussed in more detail later in this article.</p>
+        <p class="article-text">Embracing and improving existing features</p>
+        <p class="article-text">There are many features that you may already take advantage of with your apps that will continue to work with little-to-no effort on dual-screen devices supported by Microsoft and will continue to provide a good app experience. We will cover those before discussing how to design your app specifically for dual-screen scenarios.</p>
+        <p class="article-text"><b>Responsive app layouts</b></p>
+        <p class="article-text">If you design your app so that it uses responsive layouts, it will look great on every device, regardless of the device's screen size and orientation. Use existing layout techniques for the UI platform of your choice that automatically scale to fill the screen. If you have screen elements that depend on size and aspect ratio, use the APIs provided by your UI platform to adjust your layout when the size or aspect ratio changes.</p>
+        <p class="article-text">Because your app runs on many different devices, you've probably already developed it to handle various screen and window sizes, and it should continue to work seamlessly. However, keep in mind that you might need to account for new screen sizes and aspect ratios that are not typical for PCs and mobile devices, such as portrait (taller view), landscape (wider view), dual-portrait (double the width of portrait), and dual-landscape (double the height of landscape)</p>
+        <p class="article-text"><b>Consider all device orientations</b></p>
+        <p class="article-text">We expect users to be creative in using dual-screen devices in the manner that works for them. This means your application might not always be used in the typical orientation; portrait for Android, or landscape for Windows. Consider supporting all orientations and screen configurations. For example, if your app is designed primarily for portrait orientation but supports a lot of text entry, users might be more likely to use it in landscape orientation on a dual-screen device, with the keyboard on the bottom screen.</p>
+        <p class="article-text">Dual-screen layouts can provide a better environment for multi-tasking. You won't always know in what posture the user is going to hold the device; but knowing the potential postures lets you optimize your app for the postures that make the most sense for your app.</p>
+        <p class="article-text">Our studies show that users are more comfortable typing or writing on a flat surface. If your app is heavily input oriented, like a note taking app, you can optimize it to be used in a landscape layout (if it's not already).</p>
+        <p class="article-text"><b>Support a variety of inputs</b></p>
+        <p class="article-text">Many devices, including the new dual-screen devices, support a wide variety of inputs, including typing, touch, and pen. The flexibility of dual-screen devices lets a user quickly switch between postures and input modes to fit their task. To ensure a great user experience, make sure your app supports all available input types, so the user remains in control and can interact with your app in the way they prefer.</p>
+
+        <div class="mt-5 w-100">
+            <button class="btn btn-block btn-secondary">Show 89 comments</i></button>
+        </div>
+
+        <div class="w-100">
+            <hr class="mt-5" />
+        </div>
+        <div class="row mb-5 w-100 p-0">
+            <div class="col-3">
+                <p class="category">CATEGORY ONE</p>
+                <p>Link 1</p>
+                <p>Link 2</p>
+                <p>Link 3</p>
+                <p>Link 4</p>
+                <p>Link 5</p>
+            </div>
+            <div class="col-3">
+                <p class="category">CATEGORY TWO</p>
+                <p>Link 1</p>
+                <p>Link 2</p>
+                <p>Link 3</p>
+                <p>Link 4</p>
+                <p>Link 5</p>
+            </div>
+            <div class="col-3">
+                <p class="category">CATEGORY THREE</p>
+                <p>Link 1</p>
+                <p>Link 2</p>
+                <p>Link 3</p>
+                <p>Link 4</p>
+                <p>Link 5</p>
+            </div>
+            <div class="col-3">
+                <p class="category">CATEGORY FOUR</p>
+                <p>Link 1</p>
+                <p>Link 2</p>
+                <p>Link 3</p>
+                <p>Link 4</p>
+                <p>Link 5</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add our paging buttons. Visible only when spanning. -->
+    <button class="btn btn-link paging-btn paging-btn-left">
+        <img src="https://assets/arrowl.png" height="30" width="30" />
+    </button>
+    <button class="btn btn-link paging-btn paging-btn-right">
+        <img src="https://assets/arrowr.png" height="30" width="30" />
+    </button>
+</div>
+
+<!-- Polyfills for dual screen capabilities -->
+<script src="https://assets/spanningcsspolyfill.js"></script>
+<script src="https://assets/windowsegmentspolyfill.js"></script>
+<script>
+
+        var currentPage = 0;
+        function scrollToPage(pageNumber) {
+            currentPage = pageNumber;
+
+            // Scroll over to that page.
+            const article = document.querySelector(".article");
+            const wrapper = document.querySelector(".wrapper");
+            const foldWidth = window["__foldables_env_vars__"].foldSize;
+            const screenWidth = document.querySelector(".article-text").scrollWidth + foldWidth;
+            wrapper.scrollLeft = screenWidth * pageNumber;
+            
+            // Hide the "page left" button if we're on the first page (page zero).
+            document.querySelector(".paging-btn-left").style.visibility = pageNumber === 0 ? "hidden" : "visible";
+        }
+
+        function printWindowSegments() {
+            const screens = window.getWindowSegments();
+            console.log("Window segments:");
+            console.table(screens);
+            console.log("Window size:", window.innerWidth, window.innerHeight);
+        }
+
+        // Clicking the paging buttons scroll to the desired page.
+        document.querySelector(".paging-btn-left").addEventListener("click", () => scrollToPage(currentPage - 1));
+        document.querySelector(".paging-btn-right").addEventListener("click", () => scrollToPage(currentPage + 1));
+
+        window.addEventListener("resize", () => {
+            console.log("resized");
+            printWindowSegments();
+        });
+        printWindowSegments();
+
+    </script>
+</body>
+</html>
