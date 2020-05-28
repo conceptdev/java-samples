@@ -1,0 +1,110 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.wrapper {
+    height: auto;
+    padding: 60px;
+}
+
+.article {
+    background-color: white;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.paging-btn {
+    visibility: hidden;
+    color: gray;
+    position: absolute;
+    top: 50%;
+    opacity: .7;
+}
+
+.paging-btn-right {
+    right: 54px;
+}
+
+.paging-btn-left {
+    left: 20px;
+}
+
+.headline, .article-text {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.photo-caption {
+    font-size: 0.9em;
+}
+
+.article-text {
+    font-size: 1.2em;
+}
+
+.category {
+    font-weight: bold;
+    font-size: .9em;
+}
+
+.fold-tester {
+    position: absolute;
+    height: 0;
+    width: 0;
+    background-color: magenta;
+    opacity: .2;
+    z-index: 9999;
+}
+
+@media (spanning: single-fold-vertical) {
+
+    .wrapper {
+        /* The height should reach down to the bottom of the viewport. */
+        height: calc(100% - 52px);
+        padding: 30px 0; /*No padding on the left or right so that the article controls the full area. */
+        overflow-x: scroll; 
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+    }
+
+    .headline {
+        font-size: 2em;
+    }
+
+    .article {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        margin: 0;
+        max-width: unset;
+        height: 100%;
+    }
+
+    .article > * {
+        max-width: env(fold-left);
+        padding: 0 60px;
+        margin-right: env(fold-width);
+    }
+
+    .fold-tester {
+        display: none; /* For testing, we can use display: block; to simulate the fold. */
+        width: env(fold-width);
+        height: env(fold-height);
+        top: env(fold-top);
+        left: env(fold-left);
+    }
+
+    .paging-btn-right {
+        visibility: visible;
+    }
+}
