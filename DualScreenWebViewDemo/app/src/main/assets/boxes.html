@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://assets/boxstyles.css" rel="stylesheet">
+</head>
+<body>
+<div class="content">
+    <div class="blue">1</div>
+    <div class="yellow">2</div>
+    <div class="pink">3</div>
+    <div class="green">4</div>
+    <div class="fold angled stripes"></div>
+</div>
+
+<!-- Polyfills for dual screen capabilities -->
+<script src="https://assets/spanningcsspolyfill.js"></script>
+<script src="https://assets/windowsegmentspolyfill.js"></script>
+<script>
+
+        function printWindowSegments() {
+            const screens = window.getWindowSegments();
+            console.log("Window segments:");
+            console.table(screens);
+            console.log("Window size:", window.innerWidth, window.innerHeight);
+        }
+
+        window.addEventListener("resize", () => {
+            console.log("resized");
+            printWindowSegments();
+        });
+        printWindowSegments();
+
+</script>
+</body>
+</html>

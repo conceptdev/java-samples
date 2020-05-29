@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         webView.loadUrl("https://assets/index.html");
-        //webView.loadUrl("https://foldable-devices.github.io/device-configurator/demo/");
-        //webView.loadUrl("https://foldable-devices.github.io/demos/battleship/");
+        // TODO: Uncomment the line below to instead view the boxes demo - https://github.com/MicrosoftEdge/MSEdgeExplainers/blob/master/Foldables/colored-boxes.svg
+        //webView.loadUrl("https://assets/boxes.html");
 
         UpdateSpanning();
     }
