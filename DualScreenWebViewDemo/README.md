@@ -27,8 +27,23 @@ The CSS contains these media entries to adapt the page as the app is spanned or 
 
 ![Wide screenshot](Screenshots/wide-600.png) ![Tall screenshot](Screenshots/tall-600.png)
 
+If you uncomment this line in MainActivity
+
+```java
+webView.loadUrl("https://assets/boxes.html");
+```
+
+the demo will switch to this set of colored boxes
+
+![Wide screenshot](Screenshots/wide-boxes-600.png)
+
+which is based on [this absolute positioning demo](https://github.com/MicrosoftEdge/MSEdgeExplainers/blob/master/Foldables/explainer.md#colored-boxes-absolutely-positioned) from the [Edge foldables explainer](https://github.com/MicrosoftEdge/MSEdgeExplainers/blob/master/Foldables/explainer.md):
+
+![Colored boxes demo from explainer](Screenshots/colored-boxes.svg)
+
 ## Other links
 
+- [Microsoft Edge foldables explainer](https://github.com/MicrosoftEdge/MSEdgeExplainers/blob/master/Foldables/explainer.md)
 - [Chromium proposal](https://chromium-review.googlesource.com/c/chromium/src/+/2129994)
 - [Battleship with configurator](https://foldable-devices.github.io/demos/battleship/)
 - [Photo gallery with configurator](https://foldable-devices.github.io/demos/photo-gallery/)

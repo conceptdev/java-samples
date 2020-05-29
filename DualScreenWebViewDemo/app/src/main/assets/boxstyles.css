@@ -1,0 +1,163 @@
+/*Copyright (c) 2020 Intel Corporation. All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. Neither the name of Intel Corporation nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+  https://github.com/foldable-devices/device-configurator/blob/master/LICENSE.md*/
+  :host {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+  *,
+  *::after,
+  *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+  }
+  .content {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+  }
+  .text {
+    font-weight: bold;
+    color: white;
+    margin-top: 12px;
+  }
+  .stripes {
+    height: 250px;
+    width: 200px;
+    background-size: 40px 40px;
+  }
+  .angled {
+    background-color: #737373;
+    background-image:
+      linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+      transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+      transparent 75%, transparent);
+  }
+  .fold {
+    height: 0;
+    width: 0;
+  }
+
+  .blue {
+      height: 100px;
+      width: 100px;
+      background-color: blue;
+      text-align: center;
+      color: white;
+  }
+
+  .yellow {
+      height: 100px;
+      width: 100px;
+      background-color: yellow;
+      text-align: center;
+  }
+
+  .pink {
+      height: 100px;
+      width: 100px;
+      background-color: pink;
+      text-align: center;
+  }
+
+  .green {
+      height: 100px;
+      width: 100px;
+      background-color: green;
+      text-align: center;
+  }
+
+  @media (spanning: single-fold-vertical) {
+    .main-container {
+      width: env(fold-left);
+      height: 100vh;
+    }
+    .fold {
+      height: env(fold-height);
+      width: env(fold-width);
+      left: env(fold-left);
+      top: 0;
+      position: absolute;
+    }
+    .content {
+      flex-direction: row;
+    }
+
+    .blue {
+        height: 100px;
+        width: 100px;
+        position: absolute;
+        left: calc(env(fold-left) - 100px);
+        top: 0;
+        background-color: blue;
+        text-align: center;
+        color: white;
+    }
+
+    .yellow {
+        height: 100px;
+        width: calc(100vw - env(fold-left) - env(fold-width));
+        position: absolute;
+        left: calc(env(fold-left) + env(fold-width));
+        top: 0;
+        background-color: yellow;
+        text-align: center;
+    }
+
+    .pink {
+        height: 100px;
+        width: env(fold-left);
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background-color: pink;
+        text-align: center;
+    }
+
+    .green {
+        height: 100px;
+        width: 100px;
+        position: absolute;
+        left: calc(env(fold-left) + env(fold-width));
+        bottom: 0;
+        background-color: green;
+        text-align: center;
+    }
+  }
+  @media (spanning: single-fold-horizontal) {
+    .main-container {
+      width: 100vw;
+      height: calc(100vh - env(fold-top) - env(fold-height));
+    }
+    .fold {
+      height: env(fold-height);
+      width: env(fold-width);
+      left: 0;
+      top: env(fold-top);
+      position: absolute;
+    }
+    .content {
+      flex-direction: column-reverse;
+    }
+  }
+  @media (spanning: none) {
+
+    .fold {
+      height: 0;
+      width: 0;
+    }
+    .content {
+      flex-direction: row;
+    }
+    .second-container {
+      height: 0;
+      width: 0;
+      display: none;
+    }
+  }
