@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<!--
+Copyright (c) 2020 Intel Corporation. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. Neither the name of Intel Corporation nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+https://github.com/foldable-devices/device-configurator/blob/master/LICENSE.md
+-->
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://assets/styles.css" rel="stylesheet">
+</head>
+<body>
+<div class="content">
+    <div class="main-container"><div class="text">Main Content</div></div>
+    <div class="fold angled stripes"></div>
+    <div class="second-container"><div class="text">Detail panel</div></div>
+</div>
+
+<!-- Polyfills for dual screen capabilities -->
+<script src="https://assets/spanningcsspolyfill.js"></script>
+<script src="https://assets/windowsegmentspolyfill.js"></script>
+<script>
+
+        function printWindowSegments() {
+            const screens = window.getWindowSegments();
+            console.log("Window segments:");
+            console.table(screens);
+            console.log("Window size:", window.innerWidth, window.innerHeight);
+        }
+
+        window.addEventListener("resize", () => {
+            console.log("resized");
+            printWindowSegments();
+        });
+        printWindowSegments();
+
+</script>
+</body>
+</html>
