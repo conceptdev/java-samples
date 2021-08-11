@@ -1,0 +1,7 @@
+<resources>
+    <string name="ic_name">WinMgr Java</string>
+    <string name="app_name">Window Manager Java</string>
+
+    <string name="hinge_is_horizontal">"Hinge is horizontal"</string>
+    <string name="hinge_is_vertical">"Hinge is vertical"</string>
+</resources>
