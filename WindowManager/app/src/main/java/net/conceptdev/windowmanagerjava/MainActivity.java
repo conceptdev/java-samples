@@ -52,11 +52,6 @@ public class MainActivity extends AppCompatActivity {
         wir.addWindowLayoutInfoListener(runOnUiThreadExecutor(), (windowLayoutInfo -> {
             List<DisplayFeature> displayFeatures = windowLayoutInfo.getDisplayFeatures();
 
-            // reset fold values
-//            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)root.getLayoutParams();
-//            params.leftToRight = 500;
-//            root.requestLayout();
-
             if (displayFeatures.isEmpty()) {
                 outputText.setText("no display features");
                 return;
