@@ -1,6 +1,8 @@
 package net.conceptdev.windowmanagerjava;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.window.java.layout.WindowInfoRepositoryCallbackAdapter;
 import androidx.window.layout.DisplayFeature;
 import androidx.window.layout.FoldingFeature;
@@ -25,12 +27,14 @@ import com.google.android.material.internal.ContextUtils;
 public class MainActivity extends AppCompatActivity {
     String TAG = "JWM";
     WindowInfoRepositoryCallbackAdapter wir;
+    ConstraintLayout root;
     TextView outputText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        root = findViewById(R.id.root);
         outputText = findViewById(R.id.outputText);
 
         Log.d(TAG, "onCreate callback adapter");
@@ -47,7 +51,16 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onStart add listener");
         wir.addWindowLayoutInfoListener(runOnUiThreadExecutor(), (windowLayoutInfo -> {
             List<DisplayFeature> displayFeatures = windowLayoutInfo.getDisplayFeatures();
-            if (displayFeatures.isEmpty()) return;
+
+            // reset fold values
+//            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)root.getLayoutParams();
+//            params.leftToRight = 500;
+//            root.requestLayout();
+
+            if (displayFeatures.isEmpty()) {
+                outputText.setText("no display features");
+                return;
+            }
             else {
                 // update screen
                 Log.d(TAG, "window layout contains display feature/s");
@@ -55,11 +68,23 @@ public class MainActivity extends AppCompatActivity {
                     FoldingFeature foldingFeature = (FoldingFeature)displayFeature;
                     if (foldingFeature != null)
                     {   // only set if it's a fold, not other feature type. only works for single-fold devices.
+                        String out = "";
                         if (foldingFeature.getOrientation() == FoldingFeature.Orientation.HORIZONTAL) {
-                            outputText.setText(getString(R.string.hinge_is_horizontal));
+                            out += getString(R.string.hinge_is_horizontal);
                         } else {
-                            outputText.setText(getString(R.string.hinge_is_vertical));
+                            out += getString(R.string.hinge_is_vertical);
                         }
+                        out += "\n";
+                        out += "State is " + foldingFeature.getState().toString();
+                        out += "\n";
+                        out += "OcclusionType is " + foldingFeature.getOcclusionType().toString();
+                        out += "\n";
+                        out += "isSeparating is " + foldingFeature.isSeparating();
+                        out += "\n";
+                        out += "Bounds are " + foldingFeature.getBounds().toString();
+                        outputText.setText(out);
+
+                        return; // only works for one hinge/fold!
                     }
                 });
             }
