@@ -25,7 +25,7 @@ import android.widget.TextView;
 import com.google.android.material.internal.ContextUtils;
 
 /*
-* https://developer.android.com/jetpack/androidx/releases/window#window-1.0.0-alpha10
+* https://developer.android.com/jetpack/androidx/releases/window#window-1.0.0-beta01
 * */
 
 public class MainActivity extends AppCompatActivity {
@@ -55,24 +55,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        // WindowMetrics synchronous call
-        WindowMetrics wm = wmc.computeCurrentWindowMetrics(this);
-        Log.d(TAG, "wm.computeCurrentWindowMetrics: " + wm.getBounds());
-        wm = wmc.computeMaximumWindowMetrics(this);
-        Log.d(TAG, "wm.computeMaximumWindowMetrics: " + wm.getBounds());
-
         // WindowInfoRepository listener
         Log.d(TAG, "onStart add listener");
         wir.addWindowLayoutInfoListener(runOnUiThreadExecutor(), (windowLayoutInfo -> {
-            List<DisplayFeature> displayFeatures = windowLayoutInfo.getDisplayFeatures();
 
+            // WindowMetrics synchronous call
+            WindowMetrics wm = wmc.computeCurrentWindowMetrics(this);
+            wm = wmc.computeCurrentWindowMetrics(this);
+            String currentMetrics = wm.getBounds().toString();
+            wm = wmc.computeMaximumWindowMetrics(this);
+            String maxMetrics = wm.getBounds().toString();
+            String outMetrics = "\n\n";
+            outMetrics += "Current Window Metrics " + currentMetrics;
+            outMetrics += "\n";
+            outMetrics += "Maximum Window Metrics " + maxMetrics;
+
+            // WindowInfoRepository DisplayFeatures
+            List<DisplayFeature> displayFeatures = windowLayoutInfo.getDisplayFeatures();
             if (displayFeatures.isEmpty()) {
-                outputText.setText("no display features");
+                String out = getString(R.string.no_features);
+                out += outMetrics;
+                outputText.setText(out);
                 return;
             }
             else {
                 // update screen
                 Log.d(TAG, "window layout contains display feature/s");
+                String finalOutMetrics = outMetrics;
                 displayFeatures.forEach(displayFeature -> {
                     FoldingFeature foldingFeature = (FoldingFeature)displayFeature;
                     if (foldingFeature != null)
@@ -91,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                         out += "isSeparating is " + foldingFeature.isSeparating();
                         out += "\n";
                         out += "Bounds are " + foldingFeature.getBounds().toString();
+                        out += finalOutMetrics;
                         outputText.setText(out);
 
                         return; // only works for one hinge/fold!
