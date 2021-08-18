@@ -8,6 +8,10 @@ import androidx.window.layout.DisplayFeature;
 import androidx.window.layout.FoldingFeature;
 import androidx.window.layout.WindowInfoRepository;
 import androidx.window.layout.WindowLayoutInfo;
+import androidx.window.layout.WindowMetrics;
+import androidx.window.layout.WindowMetricsCalculator;
+
+import android.graphics.Rect;
 import android.os.Bundle;
 
 import java.util.List;
@@ -29,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     WindowInfoRepositoryCallbackAdapter wir;
     ConstraintLayout root;
     TextView outputText;
+    WindowMetricsCalculator wmc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +48,20 @@ public class MainActivity extends AppCompatActivity {
                         this
                 )
         );
+        wmc = WindowMetricsCalculator.Companion.getOrCreate();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
+        // WindowMetrics synchronous call
+        WindowMetrics wm = wmc.computeCurrentWindowMetrics(this);
+        Log.d(TAG, "wm.computeCurrentWindowMetrics: " + wm.getBounds());
+        wm = wmc.computeMaximumWindowMetrics(this);
+        Log.d(TAG, "wm.computeMaximumWindowMetrics: " + wm.getBounds());
+
+        // WindowInfoRepository listener
         Log.d(TAG, "onStart add listener");
         wir.addWindowLayoutInfoListener(runOnUiThreadExecutor(), (windowLayoutInfo -> {
             List<DisplayFeature> displayFeatures = windowLayoutInfo.getDisplayFeatures();
