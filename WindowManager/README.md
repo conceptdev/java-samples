@@ -16,6 +16,8 @@ dependencies {
     implementation "androidx.window:window-java:1.0.0-beta01"
 ```
 
+The implementation using `WindowInfoRepositoryCallbackAdapter` can look like this:
+
 ```java
 WindowInfoRepositoryCallbackAdapter wir;
 //...
@@ -29,19 +31,48 @@ protected void onCreate(Bundle savedInstanceState) {
     );
 }
 //...
-    @Override
-    protected void onStart() {
-        super.onStart();
-        wir.addWindowLayoutInfoListener(runOnUiThreadExecutor(), (windowLayoutInfo -> {
-            List<DisplayFeature> displayFeatures = windowLayoutInfo.getDisplayFeatures();
+@Override
+protected void onStart() {
+    super.onStart();
+    wir.addWindowLayoutInfoListener(runOnUiThreadExecutor(), layoutStateChangeCallback);
+}
 
-            displayFeatures.forEach(displayFeature -> {
-                FoldingFeature foldingFeature = (FoldingFeature)displayFeature;
-                if (foldingFeature != null)
-                {   // only set if it's a fold, not other feature type. only works for single-fold devices.
-                    // do stuff with the hinge/fold
-                }
-            });
-        }));
+@Override
+protected void onStop() {
+    super.onStop();
+    wir.removeWindowLayoutInfoListener(layoutStateChangeCallback);
+}
+//...
+void updateLayout(WindowLayoutInfo windowLayoutInfo)
+{
+    List<DisplayFeature> displayFeatures = windowLayoutInfo.getDisplayFeatures();
+
+    displayFeatures.forEach(displayFeature -> {
+        FoldingFeature foldingFeature = (FoldingFeature)displayFeature;
+        if (foldingFeature != null)
+        {   // only set if it's a fold, not other feature type. only works for single-fold devices.
+            // do stuff with the hinge/fold
+        }
+    });
+}
+class LayoutStateChangeCallback implements Consumer<WindowLayoutInfo> {
+    @Override
+    public void accept(WindowLayoutInfo windowLayoutInfo) {
+        updateLayout(windowLayoutInfo);
     }
+}
+Executor runOnUiThreadExecutor()
+{
+    return new MyExecutor();
+}
+class MyExecutor implements Executor
+{
+    Handler handler = new Handler(Looper.getMainLooper());
+    @Override
+    public void execute(Runnable command) {
+        handler.post(command);
+    }
+}
 ```
+
+Refer to the [Surface Duo developer documentation](https://docs.microsoft.com/dual-screen/android/jetpack/window-manager/) and the [Android developer documentation](https://developer.android.com/jetpack/androidx/releases/window) for more details about building apps using Jetpack Window Manager.
