@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     String TAG = "JWM";
     LayoutStateChangeCallback layoutStateChangeCallback = new LayoutStateChangeCallback();
     WindowInfoRepositoryCallbackAdapter wir;
+    WindowMetrics wm;
     ConstraintLayout root;
     TextView outputText;
     WindowMetricsCalculator wmc;
@@ -71,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
     void updateLayout(WindowLayoutInfo windowLayoutInfo)
     {
         // WindowMetrics synchronous call
-        WindowMetrics wm = wmc.computeCurrentWindowMetrics(this);
         wm = wmc.computeCurrentWindowMetrics(this);
         String currentMetrics = wm.getBounds().toString();
         wm = wmc.computeMaximumWindowMetrics(this);
