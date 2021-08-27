@@ -1,5 +1,5 @@
 <resources>
-    <string name="ic_name">Java WindowInfoRepository b1</string>
+    <string name="ic_name">Java WindowInfoRepository beta01</string>
     <string name="app_name">Window Manager Java</string>
 
     <string name="no_features">"No display features"</string>
