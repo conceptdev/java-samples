@@ -26,7 +26,7 @@ import android.widget.TextView;
 import com.google.android.material.internal.ContextUtils;
 
 /*
-* https://developer.android.com/jetpack/androidx/releases/window#window-1.0.0-beta01
+* https://developer.android.com/jetpack/androidx/releases/window#window-1.0.0-beta02
 * */
 
 public class MainActivity extends AppCompatActivity {
