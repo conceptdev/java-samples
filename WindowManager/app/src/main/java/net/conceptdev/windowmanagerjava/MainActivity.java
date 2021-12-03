@@ -4,10 +4,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.util.Consumer;
-import androidx.window.java.layout.WindowInfoRepositoryCallbackAdapter;
+import androidx.window.java.layout.WindowInfoTrackerCallbackAdapter;
 import androidx.window.layout.DisplayFeature;
 import androidx.window.layout.FoldingFeature;
-import androidx.window.layout.WindowInfoRepository;
+import androidx.window.layout.WindowInfoTracker;
 import androidx.window.layout.WindowLayoutInfo;
 import androidx.window.layout.WindowMetrics;
 import androidx.window.layout.WindowMetricsCalculator;
@@ -32,7 +32,7 @@ import com.google.android.material.internal.ContextUtils;
 public class MainActivity extends AppCompatActivity {
     String TAG = "JWM";
     LayoutStateChangeCallback layoutStateChangeCallback = new LayoutStateChangeCallback();
-    WindowInfoRepositoryCallbackAdapter wir;
+    WindowInfoTrackerCallbackAdapter wit;
     WindowMetrics wm;
     ConstraintLayout root;
     TextView outputText;
@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
         outputText = findViewById(R.id.outputText);
 
         Log.d(TAG, "onCreate callback adapter");
-        wir = new WindowInfoRepositoryCallbackAdapter(
-                WindowInfoRepository.Companion.getOrCreate(
+        wit = new WindowInfoTrackerCallbackAdapter(
+                WindowInfoTracker.Companion.getOrCreate(
                         this
                 )
         );
@@ -60,13 +60,16 @@ public class MainActivity extends AppCompatActivity {
 
         // WindowInfoRepository listener
         Log.d(TAG, "onStart add listener");
-        wir.addWindowLayoutInfoListener(runOnUiThreadExecutor(), layoutStateChangeCallback);
+        wit.addWindowLayoutInfoListener(
+                this,
+                runOnUiThreadExecutor(),
+                layoutStateChangeCallback);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        wir.removeWindowLayoutInfoListener(layoutStateChangeCallback);
+        wit.removeWindowLayoutInfoListener(layoutStateChangeCallback);
     }
 
     void updateLayout(WindowLayoutInfo windowLayoutInfo)
