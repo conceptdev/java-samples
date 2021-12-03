@@ -1,6 +1,6 @@
 # Jetpack Window Manager for Java
 
-Surface Duo sample that implements [Jetpack Window Manager beta02](https://developer.android.com/jetpack/androidx/releases/window#window-1.0.0-beta02) using Java and the **androidx.window:window-java** adapter package.
+Surface Duo sample that implements [Jetpack Window Manager beta04](https://developer.android.com/jetpack/androidx/releases/window#window-1.0.0-beta04) using Java and the **androidx.window:window-java** adapter package.
 
 ![Surface Duo running sample that shows window manager data using Java](Screenshots/winmgr-java-framed.png)
 
@@ -8,24 +8,24 @@ For Kotlin, refer to the [Surface Duo Window Manager samples repo](https://githu
 
 ## Using Java
 
-The [beta01 release](https://developer.android.com/jetpack/androidx/releases/window#window-1.0.0-beta01) introduced a different API using the `WindowInfoRepository` class which is optimized for Kotlin, and a separate package **window-java** that includes a `WindowInfoRepositoryCallbackAdapter` that makes it easy to use from Java.
+The [beta04 release](https://developer.android.com/jetpack/androidx/releases/window#window-1.0.0-beta04) uses the API introduced in beta01 - using classes optimized for Kotlin, and a separate package **window-java** that includes a `WindowInfoTrackerCallbackAdapter` that makes it easy to use from Java.
 
 ```gradle
 dependencies {
-    implementation "androidx.window:window:1.0.0-beta02"
-    implementation "androidx.window:window-java:1.0.0-beta02"
+    implementation "androidx.window:window:1.0.0-beta04"
+    implementation "androidx.window:window-java:1.0.0-beta04"
 ```
 
-The implementation using `WindowInfoRepositoryCallbackAdapter` can look like this:
+The implementation using `WindowInfoTrackerCallbackAdapter` can look like this:
 
 ```java
-WindowInfoRepositoryCallbackAdapter wir;
+WindowInfoTrackerCallbackAdapter wit;
 //...
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     //...
-    wir = new WindowInfoRepositoryCallbackAdapter(
-            WindowInfoRepository.Companion.getOrCreate(
+    wit = new WindowInfoTrackerCallbackAdapter(
+            WindowInfoTracker.Companion.getOrCreate(
                     this
             )
     );
@@ -34,13 +34,16 @@ protected void onCreate(Bundle savedInstanceState) {
 @Override
 protected void onStart() {
     super.onStart();
-    wir.addWindowLayoutInfoListener(runOnUiThreadExecutor(), layoutStateChangeCallback);
+    wit.addWindowLayoutInfoListener(
+            this,
+            runOnUiThreadExecutor(), 
+            layoutStateChangeCallback);
 }
 
 @Override
 protected void onStop() {
     super.onStop();
-    wir.removeWindowLayoutInfoListener(layoutStateChangeCallback);
+    wit.removeWindowLayoutInfoListener(layoutStateChangeCallback);
 }
 //...
 void updateLayout(WindowLayoutInfo windowLayoutInfo)
