@@ -1,6 +1,6 @@
 # Jetpack Window Manager for Java
 
-Surface Duo sample that implements [Jetpack Window Manager rc01](https://developer.android.com/jetpack/androidx/releases/window#window-1.0.0-rc01) using Java and the **androidx.window:window-java** adapter package.
+Surface Duo sample that implements [Jetpack Window Manager 1.0.0](https://developer.android.com/jetpack/androidx/releases/window#window-1.0.0) using Java and the **androidx.window:window-java** adapter package.
 
 ![Surface Duo running sample that shows window manager data using Java](Screenshots/winmgr-java-framed.png)
 
@@ -8,12 +8,12 @@ For Kotlin, refer to the [Surface Duo Window Manager samples repo](https://githu
 
 ## Using Java
 
-The [rc01 release](https://developer.android.com/jetpack/androidx/releases/window#window-1.0.0-rc01) uses the API introduced in beta01 - using classes optimized for Kotlin, and a separate package **window-java** that includes a `WindowInfoTrackerCallbackAdapter` that makes it easy to use from Java.
+Since the [rc01 release](https://developer.android.com/jetpack/androidx/releases/window#window-1.0.0-rc01) the API (introduced in beta01) uses classes optimized for Kotlin, and a separate package **window-java** that includes a `WindowInfoTrackerCallbackAdapter` that makes it easy to use from Java.
 
 ```gradle
 dependencies {
-    implementation "androidx.window:window:1.0.0-rc01"
-    implementation "androidx.window:window-java:1.0.0-rc01"
+    implementation "androidx.window:window:1.0.0"
+    implementation "androidx.window:window-java:1.0.0"
 ```
 
 The implementation using `WindowInfoTrackerCallbackAdapter` can look like this:
